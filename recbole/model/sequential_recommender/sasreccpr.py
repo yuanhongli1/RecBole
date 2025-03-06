@@ -193,6 +193,13 @@ class SASRecCPR(SequentialRecommender):
 
         trm_output = self.trm_encoder(
             input_emb, extended_attention_mask, output_all_encoded_layers=True
+            
+          计算模型的前向传播，并返回注意力权重
+        """
+        seq_output, attention_weights = self.attention(item_seq, item_seq_len, return_attn=True)  # 关键修改
+        return seq_output, attention_weights  # 返回注意力权重
+        
+        
         )
         return trm_output
 
